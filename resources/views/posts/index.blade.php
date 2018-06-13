@@ -15,7 +15,7 @@
                 <h2>Categories</h2>
                 <ul>
                     @foreach($categories as $category)
-                    <li><a href={{route('filter_posts', ['id' => $category->id])}}>{{$category->name}} ({{$catNr[$loop->index]}})</a></li>   
+                    <li><a href={{route('filter_posts', ['id' => $category->id])}}>{{$category->name}} ({{$category->posts_relation->count()}})</a></li>   
                     @endforeach
                 </ul>
             </div>

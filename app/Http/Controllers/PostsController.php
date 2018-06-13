@@ -27,15 +27,9 @@ class PostsController extends Controller
         $posts = DB::table('posts')
         ->where('content', 'like', '%'.$value.'%')->paginate(3);
         $categories = Category::orderBy('position', 'asc')->get();
-        $catNr =[];
-        foreach ($categories as $category){
-            $postsCounter = Post::where('category', $category->id)->count();
-            array_push($catNr, $postsCounter);
-        }
         return view('posts.index', [
         'posts' => $posts,
         'categories'=>$categories,
-        'catNr'=>$catNr,
         ]);
     }
 
@@ -145,15 +139,9 @@ class PostsController extends Controller
     public function filter($idz){
         $posts = Post::where('category', $idz)->paginate(3);
         $categories = Category::orderBy('position', 'asc')->get();
-        $catNr =[];
-        foreach ($categories as $category){
-            $postsCounter = Post::where('category', $category->id)->count();
-            array_push($catNr, $postsCounter);
-        }
         return view('posts.filtered', [
         'posts' => $posts,
         'categories'=>$categories,
-        'catNr'=>$catNr,
         ]);
     }
     //sitas tam kad Admin sectiona rodytu tik admin useriui, ir tam kad kitas vartotojas negaletu pasiekti per GET
